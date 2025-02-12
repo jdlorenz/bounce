@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://djtoxueawgf3e"]
+[gd_scene load_steps=45 format=3 uid="uid://djtoxueawgf3e"]
 
 [ext_resource type="PackedScene" uid="uid://b7j4r2cx45yq6" path="res://scenes/puck.tscn" id="1_akwt1"]
 [ext_resource type="Texture2D" uid="uid://bdygcp4ugbb6i" path="res://assets/sprites/rink_flat.png" id="2_dovg0"]
@@ -104,6 +104,48 @@ b = Vector2(-1118, 0)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_jmf5u"]
 b = Vector2(-57, 6)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_41dv1"]
+b = Vector2(-24, 5)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_bv5da"]
+a = Vector2(23, -27)
+b = Vector2(-3, -18)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6lo7a"]
+a = Vector2(-27, -291)
+b = Vector2(-48, -281)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_5w714"]
+a = Vector2(-2, 0)
+b = Vector2(-18, 13)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_4b0xx"]
+a = Vector2(9, -1)
+b = Vector2(-4, 14)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_e282l"]
+b = Vector2(-7, 11)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6l7we"]
+a = Vector2(0, -1)
+b = Vector2(-7, 12)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_lkc5t"]
+b = Vector2(-10, 31)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_kcdpp"]
+b = Vector2(-6, 40)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_mwkxu"]
+b = Vector2(-1, 152)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_u2fl5"]
+a = Vector2(-30, -772)
+b = Vector2(-34, -718)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4itpn"]
+size = Vector2(44, 35)
 
 [node name="Game" type="Node2D"]
 position = Vector2(-4, 2)
@@ -233,10 +275,68 @@ shape = SubResource("SegmentShape2D_g1gln")
 position = Vector2(142, -1060)
 shape = SubResource("SegmentShape2D_jmf5u")
 
+[node name="CollisionShape2D30" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(85, -1054)
+shape = SubResource("SegmentShape2D_41dv1")
+
+[node name="CollisionShape2D31" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(38, -1022)
+shape = SubResource("SegmentShape2D_bv5da")
+
+[node name="CollisionShape2D32" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(62, -749)
+shape = SubResource("SegmentShape2D_6lo7a")
+
+[node name="CollisionShape2D33" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(62, -749)
+shape = SubResource("SegmentShape2D_6lo7a")
+
+[node name="CollisionShape2D34" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(62, -749)
+shape = SubResource("SegmentShape2D_6lo7a")
+
+[node name="CollisionShape2D35" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(16, -1030)
+shape = SubResource("SegmentShape2D_5w714")
+
+[node name="CollisionShape2D36" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-11, -1016)
+shape = SubResource("SegmentShape2D_4b0xx")
+
+[node name="CollisionShape2D37" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-15, -1002)
+shape = SubResource("SegmentShape2D_e282l")
+
+[node name="CollisionShape2D38" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-22, -990)
+shape = SubResource("SegmentShape2D_6l7we")
+
+[node name="CollisionShape2D39" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-29, -978)
+shape = SubResource("SegmentShape2D_lkc5t")
+
+[node name="CollisionShape2D40" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-39, -947)
+shape = SubResource("SegmentShape2D_kcdpp")
+
+[node name="CollisionShape2D41" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-49, -855)
+shape = SubResource("SegmentShape2D_mwkxu")
+
+[node name="CollisionShape2D42" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-15, -137)
+shape = SubResource("SegmentShape2D_u2fl5")
+
+[node name="CollisionShape2D43" type="CollisionShape2D" parent="StaticBody2D"]
+
+[node name="CollisionShape2D44" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-71, -720)
+shape = SubResource("RectangleShape2D_4itpn")
+
 [node name="RinkFlat" type="Sprite2D" parent="."]
 position = Vector2(861, -477)
 texture = ExtResource("2_dovg0")
 
 [node name="Puck" parent="." instance=ExtResource("1_akwt1")]
-position = Vector2(857, -479)
+position = Vector2(861, -477)
 gravity_scale = 0.0
