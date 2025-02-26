@@ -1,7 +1,12 @@
-[gd_scene load_steps=58 format=3 uid="uid://djtoxueawgf3e"]
+[gd_scene load_steps=65 format=3 uid="uid://djtoxueawgf3e"]
 
 [ext_resource type="PackedScene" uid="uid://b7j4r2cx45yq6" path="res://scenes/puck.tscn" id="1_akwt1"]
 [ext_resource type="Texture2D" uid="uid://bdygcp4ugbb6i" path="res://assets/sprites/rink_flat.png" id="2_dovg0"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="3_dte2d"]
+[ext_resource type="Texture2D" uid="uid://3w4f4xolgjxc" path="res://assets/sprites/rd.png" id="4_okwn0"]
+[ext_resource type="Script" path="res://scenes/state_machine.gd" id="5_vh1ue"]
+[ext_resource type="Script" path="res://scripts/states/UnitIdle.gd" id="6_btv8s"]
+[ext_resource type="Script" path="res://scripts/states/UnitChasePuck.gd" id="7_ev0l1"]
 
 [sub_resource type="GDScript" id="GDScript_k20qk"]
 
@@ -197,6 +202,20 @@ b = Vector2(96, -183)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_stw31"]
 a = Vector2(139, -180)
 b = Vector2(95, -183)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sem0u"]
+size = Vector2(60, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w5fme"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_okwn0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Game" type="Node2D"]
 position = Vector2(-4, 2)
@@ -434,9 +453,31 @@ shape = SubResource("SegmentShape2D_yyoee")
 [node name="CollisionShape2D58" type="CollisionShape2D" parent="RinkFlat/StaticBody2D"]
 shape = SubResource("SegmentShape2D_stw31")
 
-[node name="Puck" parent="." instance=ExtResource("1_akwt1")]
+[node name="Puck" parent="." groups=["Puck"] instance=ExtResource("1_akwt1")]
 position = Vector2(861, -477)
 gravity_scale = 0.0
 angular_velocity = 0.261799
 
-[node name="RightDef" type="RigidBody2D" parent="."]
+[node name="Player" type="RigidBody2D" parent="."]
+position = Vector2(389, -325)
+gravity_scale = 0.0
+script = ExtResource("3_dte2d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(34, 21.5)
+shape = SubResource("RectangleShape2D_sem0u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(34, 22)
+sprite_frames = SubResource("SpriteFrames_w5fme")
+
+[node name="StateMachine" type="Node" parent="Player" node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_vh1ue")
+initial_state = NodePath("UnitIdle")
+
+[node name="UnitIdle" type="Node" parent="Player/StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("6_btv8s")
+player = NodePath("../..")
+
+[node name="UnitChasePuck" type="Node" parent="Player/StateMachine"]
+script = ExtResource("7_ev0l1")
