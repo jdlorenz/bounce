@@ -2,31 +2,30 @@ extends State
 class_name UnitChasePuck
 
 @export var player: RigidBody2D
-@export var move_speed:= 100.0
+@export var move_speed:= 200.0
 
-var move_direction : Vector2 
-var wander_time : float
-
-func move_towards_puck():
-	move_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
-	wander_time = randf_range(1,4)
-	 
-func rotate_towards_puck():
-	move_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
-	wander_time = randf_range(1,4)
+var puck: RigidBody2D
 
 func Enter():
-	rotate_towards_puck()
-	move_towards_puck()
-	
-func Update(delta: float):
-	if wander_time > 0:
-		wander_time -= delta
-	
-	else:
-		rotate_towards_puck()
-		move_towards_puck()
+	puck = get_tree().get_first_node_in_group("Puck")
 		
 func Physics_Update(delta: float):
-	if player:
-		player.linear_velocity = move_direction * move_speed
+	var direction = puck.global_position - player.global_position
+	var angle = direction.angle() + deg_to_rad(90)
+	var r = player.global_rotation
+	player.mass = 100
+
+	player.global_rotation = lerp_angle(r,angle,0.02)
+	
+	if direction.length() < 500:
+		player.move_and_collide(direction.normalized() * move_speed * delta)
+		player.global_rotation = lerp_angle(r,angle,0.02)
+	else:
+		player.move_and_collide(direction.normalized() * move_speed * delta)
+		
+	if direction.length() >= 500:
+		Transitioned.emit(self, "UnitIdle")
+	
+	
+
+	

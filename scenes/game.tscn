@@ -204,7 +204,7 @@ a = Vector2(139, -180)
 b = Vector2(95, -183)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sem0u"]
-size = Vector2(60, 19)
+size = Vector2(60, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_w5fme"]
 animations = [{
@@ -455,16 +455,19 @@ shape = SubResource("SegmentShape2D_stw31")
 
 [node name="Puck" parent="." groups=["Puck"] instance=ExtResource("1_akwt1")]
 position = Vector2(861, -477)
+collision_layer = 2
+mass = 121.036
 gravity_scale = 0.0
-angular_velocity = 0.261799
 
 [node name="Player" type="RigidBody2D" parent="."]
 position = Vector2(389, -325)
+collision_mask = 2
+mass = 0.004
 gravity_scale = 0.0
 script = ExtResource("3_dte2d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(34, 21.5)
+position = Vector2(34, 22)
 shape = SubResource("RectangleShape2D_sem0u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
@@ -473,11 +476,12 @@ sprite_frames = SubResource("SpriteFrames_w5fme")
 
 [node name="StateMachine" type="Node" parent="Player" node_paths=PackedStringArray("initial_state")]
 script = ExtResource("5_vh1ue")
-initial_state = NodePath("UnitIdle")
+initial_state = NodePath("UnitChasePuck")
 
 [node name="UnitIdle" type="Node" parent="Player/StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("6_btv8s")
 player = NodePath("../..")
 
-[node name="UnitChasePuck" type="Node" parent="Player/StateMachine"]
+[node name="UnitChasePuck" type="Node" parent="Player/StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("7_ev0l1")
+player = NodePath("../..")
